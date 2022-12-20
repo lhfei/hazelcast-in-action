@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>2.7.3</version>
+		<relativePath/> <!-- lookup parent from repository -->
+	</parent>
+	<groupId>cn.lhfei.hazelcast</groupId>
+	<artifactId>hazelcast-in-action</artifactId>
+	<version>1.4.0</version>
+	<name>hazelcast-in-action</name>
+	<description>Hazelcast sample code.</description>
+	<properties>
+		<java.version>1.8</java.version>
+		<arrow.version>8.0.0</arrow.version>
+		<hazelcast.version>5.1.3</hazelcast.version>
+		<openapi.version>1.6.9</openapi.version>
+		<jooq.version>3.14.16</jooq.version>
+		<mapstruct.version>1.5.2.Final</mapstruct.version>
+	</properties>
+	
+	<dependencies>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-actuator</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-devtools</artifactId>
+			<scope>runtime</scope>
+			<optional>true</optional>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-configuration-processor</artifactId>
+			<optional>true</optional>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+		
+		<dependency>
+		    <groupId>org.springframework.shell</groupId>
+		    <artifactId>spring-shell</artifactId>
+		    <version>1.2.0.RELEASE</version>
+		</dependency>
+		
+		<!-- Kafka -->
+		<dependency>
+			<groupId>org.springframework.kafka</groupId>
+			<artifactId>spring-kafka</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.kafka</groupId>
+			<artifactId>spring-kafka-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+		    <groupId>org.apache.kafka</groupId>
+		    <artifactId>connect-json</artifactId>
+		    <version>3.1.1</version>
+		</dependency>
+		
+		<!-- Hazelcast -->
+		<dependency>
+		    <groupId>com.hazelcast</groupId>
+		    <artifactId>hazelcast</artifactId>
+		    <version>${hazelcast.version}</version>
+		</dependency>
+		<dependency>
+		    <groupId>com.hazelcast</groupId>
+		    <artifactId>hazelcast-spring</artifactId>
+		    <version>${hazelcast.version}</version>
+		</dependency>
+		<dependency>
+		    <groupId>com.hazelcast.jet</groupId>
+		    <artifactId>hazelcast-jet-kafka</artifactId>
+		    <version>${hazelcast.version}</version>
+		</dependency>
+		<dependency>
+		    <groupId>com.hazelcast.jet</groupId>
+		    <artifactId>hazelcast-jet-hadoop</artifactId>
+		    <version>${hazelcast.version}</version>
+		</dependency>
+		<!-- CDC -->
+		<dependency>
+            <groupId>com.hazelcast.jet</groupId>
+            <artifactId>hazelcast-jet-cdc-debezium</artifactId>
+            <version>${hazelcast.version}</version>
+            <exclusions>
+            	<exclusion>
+            		<groupId>io.debezium</groupId>
+    				<artifactId>debezium-core</artifactId>
+            	</exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>com.hazelcast.jet</groupId>
+            <artifactId>hazelcast-jet-cdc-mysql</artifactId>
+            <version>${hazelcast.version}</version>
+            <exclusions>
+            	<exclusion>
+            		<groupId>io.debezium</groupId>
+            		<artifactId>debezium-connector-mysql</artifactId>
+            	</exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+		    <groupId>io.debezium</groupId>
+		    <artifactId>debezium-connector-mysql</artifactId>
+		    <version>1.9.5.Final</version>
+		</dependency>
+
+		<!-- Hadoop -->
+		<dependency>
+		    <groupId>org.apache.hadoop</groupId>
+		    <artifactId>hadoop-client</artifactId>
+		    <version>3.3.1</version>
+		    <scope>provided</scope>
+		</dependency>
+
+		<!-- Open API -->
+		<dependency>
+            <groupId>org.springdoc</groupId>
+            <artifactId>springdoc-openapi-ui</artifactId>
+            <version>${openapi.version}</version>
+        </dependency>
+        <dependency>
+	      <groupId>org.springdoc</groupId>
+	      <artifactId>springdoc-openapi-webmvc-core</artifactId>
+	      <version>${openapi.version}</version>
+	   </dependency>
+
+		<dependency>
+			<groupId>org.mapstruct</groupId>
+			<artifactId>mapstruct</artifactId>
+			<version>${mapstruct.version}</version>
+		</dependency>
+		
+		<!-- Google Library -->
+		<dependency>
+			<groupId>com.google.code.gson</groupId>
+			<artifactId>gson</artifactId>
+		</dependency>
+		<dependency>
+		    <groupId>com.google.code.findbugs</groupId>
+		    <artifactId>jsr305</artifactId>
+		    <version>3.0.2</version>
+		</dependency>
+		
+		<!-- Javasx Annotation -->
+		<dependency>
+		    <groupId>javax.annotation</groupId>
+		    <artifactId>javax.annotation-api</artifactId>
+		    <version>1.3.2</version>
+		</dependency>
+	
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
+                </configuration>
+            </plugin>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+		</plugins>
+	</build>
+
+</project>

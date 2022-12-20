@@ -1,0 +1,62 @@
+hazelcast:
+  cluster-name: HZ-IN-ACTION
+  jet:
+    enabled: true
+    resource-upload-enabled: true
+    lossless-restart-enabled: false
+    cooperative-thread-count: 8
+    flow-control-period: 100
+    backup-count: 1
+    scale-up-delay-millis: 10000
+    max-processor-accumulated-records: 1000000000
+    edge-defaults:
+      # capacity of the concurrent SPSC queue between each two processors
+      queue-size: 1024
+      # network packet size limit in bytes, only applies to distributed edges
+      packet-size-limit: 16384
+      # receive window size multiplier, only applies to distributed edges
+      receive-window-multiplier: 3
+  network:
+    rest-api:
+      enabled: true
+      endpoint-groups:
+        CLUSTER_READ:
+          enabled: true
+        CLUSTER_WRITE:
+          enabled: true
+        HOT_RESTART:
+          enabled: true
+    port:
+      auto-increment: true
+      port-count: 100
+      port: 5701
+      
+    join:
+      multicast:
+        enabled: false
+      tcp-ip:
+        connection-timeout-seconds: 1
+        enabled: true
+        member-list:
+          - 11.50.79.49
+  map:
+    trades:
+      in-memory-format: BINARY
+      indexes:
+        - type: HASH
+          attributes:
+            - "symbol"
+        - type: SORTED
+          attributes:
+            - "timestamp"
+    symbols:
+      in-memory-format: BINARY
+    query1_Results:
+      in-memory-format: BINARY
+      
+    life:
+      attributes:
+        age:
+          extractor-class-name: cn.lhfei.hazelcast.orm.domain.LifeAgeValueExtractor
+
+    

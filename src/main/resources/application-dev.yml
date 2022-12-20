@@ -1,0 +1,57 @@
+server:
+  port: 8800
+  servlet:
+    context-path: /api/v1
+
+# Logging Settings
+logging:
+  level:
+    '[cn.lhfei.hazelcast]': debug
+    '[org.springframework]': info
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} - %msg%n"
+    file: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
+  logback:
+    rollingpolicy:
+      max-file-size: 1024000
+
+swagger2:
+  version: 1.4.0
+  author: Hefei Li
+  email: lhfeilaile@gmail.com
+  scm-url: https://github.com/lhfei/datax-dashbaord.git
+  description: Hefei Li | Architecture
+  
+spring:
+  hazelcast:
+    config: classpath:hazelcast.yaml
+    
+  kafka:
+    consumer:
+      group-id: test
+      auto-offset-reset: earliest
+        
+    # change this property if you are using your own
+    # Kafka cluster or your Docker IP is different
+    #bootstrap-servers: 192.168.134.92:9092
+    bootstrap-servers: 11.91.142.3:9092,11.91.142.4:9092,11.91.142.5:9092
+
+## Kafka Topics 
+kafka:
+  group-id: cdc-demo
+  auto-offset-reset: latest
+  bootstrap-servers: 11.91.142.3:9092,11.91.142.4:9092,11.91.142.5:9092
+  topics:
+    message: "lhfei"
+    trades: "trades"
+    
+springdoc:
+  api-docs:
+    enabled: true
+    path: /api-docs
+#    path: "/endpoints"
+  show-actuator: true
+  swagger-ui:
+    path: /swagger-ui.html
+  packages-to-scan:
+  - cn.lhfei.hazelcast.web.api
